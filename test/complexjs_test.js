@@ -21,7 +21,7 @@ describe('complexjs', () => {
   it('handles get complex part', () => {
     const complexPart = im(c1);
     expect(complexPart).to.equal(1);
-  })
+  });
 
   it('handles sum', () => {
     const result = csum(c1, c2);
@@ -33,12 +33,12 @@ describe('complexjs', () => {
     const result = csub(c1, c2);
     expect(result.re).to.equal(-2);
     expect(result.im).to.equal(-3);
-  })
+  });
 
   it('handles product', () => {
     const result = cmul(c1, c2);
     expect(result.re).to.equal(-1);
     expect(result.im).to.equal(7);
-  })
+  });
 
 });
