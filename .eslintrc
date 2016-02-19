@@ -1,0 +1,17 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "ecmaFeatures": {
+    "jsx": true,
+    "modules": true
+  },
+  "rules": {
+    "no-mixed-spaces-and-tabs": [2, "smart-tabs"],
+    "indent": [2, 2],
+    "quotes": [2, "single"],
+    "no-trailing-spaces": [2, { "skipBlankLines": true }]
+  }
+}
