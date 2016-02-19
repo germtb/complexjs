@@ -7,7 +7,8 @@ import {
   cmul,
   cmod,
   carg,
-  toPolar
+  toPolar,
+  conjugate
 } from '../src/complex';
 
 describe('complexjs', () => {
@@ -64,5 +65,11 @@ describe('complexjs', () => {
     expect(result.r).to.equal(Math.sqrt(2));
     expect(result.arg).to.equal(Math.PI / 4);
   })
+
+  it('handles get conjugate', () => {
+    const result = conjugate(c1);
+    expect(result.re).to.equal(1);
+    expect(result.im).to.equal(-1);
+  });
 
 });

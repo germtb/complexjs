@@ -33,3 +33,10 @@ export const toPolar = function(c) {
     arg: carg(c)
   };
 }
+
+export const conjugate = function(c) {
+  return {
+    re: re(c),
+    im: -im(c)
+  }
+}
