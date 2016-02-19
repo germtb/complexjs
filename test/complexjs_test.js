@@ -1,16 +1,24 @@
 import {expect} from 'chai';
-import {re, im, csum, csub, cmul} from '../src/complex';
+import {
+  re,
+  im,
+  csum,
+  csub,
+  cmul,
+  cmod,
+  carg,
+  toPolar
+} from '../src/complex';
 
 describe('complexjs', () => {
 
-  const pi = 3.14159268;
   var c1, c2, c3, c4;
 
   before(() => {
     c1 = {re: 1, im: 1};
     c2 = {re: 3, im: 4};
-    c3 = {r: 1, theta: pi/2};
-    c4 = {r: 1, theta: pi};
+    c3 = {r: 1, arg: Math.PI/2};
+    c4 = {r: 1, arg: Math.PI};
   });
 
   it('handles get real part', () => {
@@ -40,5 +48,21 @@ describe('complexjs', () => {
     expect(result.re).to.equal(-1);
     expect(result.im).to.equal(7);
   });
+
+  it('handles get modulus', () => {
+    const result = cmod(c1);
+    expect(result).to.equal(Math.sqrt(2));
+  });
+
+  it('handles get arg', () => {
+    const result = carg(c1);
+    expect(result).to.equal(Math.PI / 4);
+  });
+
+  it('handles conversion to polar', () => {
+    const result = toPolar(c1);
+    expect(result.r).to.equal(Math.sqrt(2));
+    expect(result.arg).to.equal(Math.PI / 4);
+  })
 
 });
