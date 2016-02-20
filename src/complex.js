@@ -24,7 +24,26 @@ export const cmod = function(c) {
 }
 
 export const carg = function(c) {
-  return Math.atan(re(c) / im(c));
+  const x = re(c);
+  const y = im(c);
+
+  if ( y == 0) {
+    return x > 0 ? 0 : - Math.PI;
+  } else if (x == 0) {
+    return y > 0 ? Math.PI / 2 : - Math.PI / 2;
+  }
+
+  const arg = Math.atan2(x, y);
+
+  if (x > 0 && y > 0) {
+    return arg;
+  } else if (x < 0 && y > 0) {
+    return arg + Math.PI;
+  } else if (x < 0 && y < 0) {
+    return arg;
+  } else if (x > 0 && y < 0) {
+    return arg - Math.PI;
+  }
 }
 
 export const toPolar = function(c) {
