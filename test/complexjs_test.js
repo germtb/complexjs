@@ -8,12 +8,15 @@ import {
   cmod,
   carg,
   toPolar,
-  conjugate
+  conjugate,
+  isPolar,
+  isEuler
 } from '../src/complex';
 
 describe('complexjs', () => {
 
   var c1, c2, c3, c4, c5, c6, c7, c8, c9, c0;
+  var p0;
 
   before(() => {
     c1 = {re: 1, im: 1};
@@ -27,91 +30,82 @@ describe('complexjs', () => {
     c8 = {re: -1, im: 0};
     c9 = {re: 0, im: -1};
     c0 = {re: 0, im: 0};
+
+    p0 = {r: 1, arg: 0};
   });
 
   it('handles get real part', () => {
-    const realPart = re(c1);
-    expect(realPart).to.equal(1);
+    expect(re(c1)).to.equal(1);
   });
 
   it('handles get complex part', () => {
-    const complexPart = im(c1);
-    expect(complexPart).to.equal(1);
+    expect(im(c1)).to.equal(1);
   });
 
   it('handles sum', () => {
-    const result = csum(c1, c5);
-    expect(result.re).to.equal(4);
-    expect(result.im).to.equal(5);
+    expect(csum(c1, c5)).to.deep.equal({re: 4, im: 5});
   });
 
   it('handles substract', () => {
-    const result = csub(c1, c5);
-    expect(result.re).to.equal(-2);
-    expect(result.im).to.equal(-3);
+    expect(csub(c1, c5)).to.deep.equal({re: -2, im: -3});
   });
 
   it('handles product', () => {
-    const result = cmul(c1, c5);
-    expect(result.re).to.equal(-1);
-    expect(result.im).to.equal(7);
+    expect(cmul(c1, c5)).to.deep.equal({re: -1, im: 7});
   });
 
   it('handles get modulus', () => {
-    const result = cmod(c1);
-    expect(result).to.equal(Math.sqrt(2));
+    expect(cmod(c1)).to.equal(Math.sqrt(2));
   });
 
   it('handles get arg in the first quadrant', () => {
-    const result = carg(c1);
-    expect(result).to.equal(Math.PI / 4);
+    expect(carg(c1)).to.equal(Math.PI / 4);
   });
 
   it('handles get arg in the second quadrant', () => {
-    const result = carg(c2);
-    expect(result).to.equal(3 * Math.PI / 4);
+    expect(carg(c2)).to.equal(3 * Math.PI / 4);
   });
 
   it('handles get arg in the third quadrant', () => {
-    const result = carg(c3);
-    expect(result).to.equal(- 3 * Math.PI / 4);
+    expect(carg(c3)).to.equal(- 3 * Math.PI / 4);
   });
 
   it('handles get arg in the fourth quadrant', () => {
-    const result = carg(c4);
-    expect(result).to.equal(- Math.PI / 4);
+    expect(carg(c4)).to.equal(- Math.PI / 4);
   });
 
   it('handles get between the forth and first quadrant', () => {
-    const result = carg(c6);
-    expect(result).to.equal(0);
+    expect(carg(c6)).to.equal(0);
   });
 
   it('handles get between the first and second quadrant', () => {
-    const result = carg(c7);
-    expect(result).to.equal(Math.PI / 2);
+    expect(carg(c7)).to.equal(Math.PI / 2);
   });
 
   it('handles get between the second and third quadrant', () => {
-    const result = carg(c8);
-    expect(result).to.equal(- Math.PI);
+    expect(carg(c8)).to.equal(- Math.PI);
   });
 
   it('handles get between the third and forth quadrant', () => {
-    const result = carg(c9);
-    expect(result).to.equal(- Math.PI / 2);
+    expect(carg(c9)).to.equal(- Math.PI / 2);
   });
 
   it('handles conversion to polar', () => {
-    const result = toPolar(c1);
-    expect(result.r).to.equal(Math.sqrt(2));
-    expect(result.arg).to.equal(Math.PI / 4);
+    expect(toPolar(c1)).to.deep.equal({r: Math.sqrt(2), arg: Math.PI / 4});
   })
 
   it('handles get conjugate', () => {
-    const result = conjugate(c1);
-    expect(result.re).to.equal(1);
-    expect(result.im).to.equal(-1);
+    expect(conjugate(c1)).to.deep.equal({re: 1, im: -1});
+  });
+
+  it('handles is polar', () => {
+    expect(isPolar(c0)).to.equal(false);
+    expect(isPolar(p0)).to.equal(true);
+  });
+
+  it('handles is euler', () => {
+    expect(isEuler(c0)).to.equal(true);
+    expect(isEuler(p0)).to.equal(false);
   });
 
 });

@@ -1,4 +1,12 @@
 
+export const isEuler = function(c) {
+  return 're' in c || 'im' in c;
+}
+
+export const isPolar = function(c) {
+  return 'r' in c && 'arg' in c;
+}
+
 export const re = function(c) {
   return c.re ? c.re : 0;
 }
