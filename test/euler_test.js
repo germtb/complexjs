@@ -97,7 +97,8 @@ describe('euler form', () => {
   });
 
   it('handles conversion to polar', () => {
-    expect(toPolar(c1)).to.deep.equal({r: Math.sqrt(2), arg: Math.PI / 4});
+    expect(toPolar(c1).r).to.equal(Math.sqrt(2));
+    expect(toPolar(c1).arg).to.equal(Math.PI / 4);
   });
 
   it('handles get conjugate', () => {

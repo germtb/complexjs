@@ -36,10 +36,10 @@ export const csum = function(c1, c2) {
 };
 
 export const csum_euler = function(c1, c2) {
-  return {
+  return Object.assign({}, c1, c2, {
     re: re(c1) + re(c2),
     im: im(c1) + im(c2)
-  };
+  });
 };
 
 export const csum_polar = function(c1, c2) {
@@ -54,10 +54,10 @@ export const csub = function(c1, c2) {
 };
 
 export const csub_euler = function(c1, c2) {
-  return {
+  return Object.assign({}, c1, c2, {
     re: re(c1) - re(c2),
     im: im(c1) - im(c2)
-  };
+  });
 };
 
 export const csub_polar = function(c1, c2) {
@@ -72,10 +72,10 @@ export const cmul = function(c1, c2) {
 };
 
 export const cmul_euler = function(c1, c2) {
-  return {
+  return Object.assign({}, c1, c2, {
     re: re(c1) * re(c2) - im(c1) * im(c2),
     im: re(c1) * im(c2) + re(c2) * im(c1)
-  };
+  });
 };
 
 export const cmul_polar = function(c1, c2) {
@@ -90,12 +90,12 @@ export const cdiv = function(c1, c2) {
 };
 
 export const cdiv_euler = function(c1, c2) {
-  const mod = cmod2(c2);
   const mul = cmul(c1, conjugate(c2));
-  return {
-    re: mul.re / mod,
-    im: mul.im / mod
-  };
+  const mod2 = cmod2(c2);
+  return Object.assign({}, c1, c2, {
+    re: mul.re / mod2,
+    im: mul.im / mod2
+  });
 };
 
 export const cdiv_polar = function(c1, c2) {
@@ -186,10 +186,10 @@ export const toPolar = function(c) {
 };
 
 export const toPolar_euler = function(c) {
-  return {
+  return Object.assign({}, c, {
     r: cmod(c),
     arg: carg(c)
-  };
+  });
 };
 
 export const conjugate = function(c) {
@@ -197,10 +197,10 @@ export const conjugate = function(c) {
 };
 
 export const conjugate_euler = function(c) {
-  return {
+  return Object.assign({}, c, {
     re: re(c),
     im: -im(c)
-  };
+  });
 };
 
 export const conjugate_polar = function(c) {
@@ -215,7 +215,7 @@ export const cequals = function(c1, c2) {
 };
 
 export const cequals_euler = function(c1, c2) {
-  return c1.re === c2.re && c1.im === c2.im;
+  return c1.re === c2.re &&  c1.im === c2.im;
 };
 
 export const cequals_polar = function(c1, c2) {
