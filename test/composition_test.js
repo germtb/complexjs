@@ -3,10 +3,7 @@ import {
   csum,
   csub,
   cmul,
-  cmod,
-  cmod2,
   cdiv,
-  carg,
   toPolar,
   conjugate,
 } from '../src/complex';
