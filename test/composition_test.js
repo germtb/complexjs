@@ -50,4 +50,28 @@ describe('composition', () => {
     expect(conjugate(c0).object).to.equal(o0);
   });
 
+  it('is preserved for polar sum', () => {
+    expect(csum(p0, p1).object).to.equal(o1);
+  });
+
+  it('is preserved for polar substract', () => {
+    expect(csub(p0, p1).object).to.equal(o1);
+  });
+
+  it('is preserved for polar product', () => {
+    expect(cmul(p0, p1).object).to.equal(o1);
+  });
+
+  it('is preserved for polar division', () => {
+    expect(cdiv(p0, p1).object).to.equal(o1);
+  });
+
+  it('is preserved for conversion to euler', () => {
+    expect(toPolar(p0).object).to.equal(o0);
+  });
+
+  it('is preserved for get polar conjugate', () => {
+    expect(conjugate(p0).object).to.equal(o0);
+  });
+
 });
