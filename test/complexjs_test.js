@@ -6,6 +6,8 @@ import {
   csub,
   cmul,
   cmod,
+  cmod2,
+  cdiv,
   carg,
   toPolar,
   conjugate,
@@ -54,8 +56,16 @@ describe('complexjs', () => {
     expect(cmul(c1, c5)).to.deep.equal({re: -1, im: 7});
   });
 
+  it('handles division', () => {
+    expect(cdiv(c1, c5)).to.deep.equal({re: 7/25, im: -1/25});
+  });
+
   it('handles get modulus', () => {
     expect(cmod(c1)).to.equal(Math.sqrt(2));
+  });
+
+  it('handles get modulus square', () => {
+    expect(cmod2(c1)).to.equal(2);
   });
 
   it('handles get arg in the first quadrant', () => {

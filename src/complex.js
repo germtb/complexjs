@@ -24,11 +24,27 @@ export const csub = function(c1, c2) {
 }
 
 export const cmul = function(c1, c2) {
-  return {re: re(c1) * re(c2) - im(c1) * im(c2), im: re(c1) * im(c2) + re(c2) * im(c1)};
+  return {
+    re: re(c1) * re(c2) - im(c1) * im(c2),
+    im: re(c1) * im(c2) + re(c2) * im(c1)
+  };
+}
+
+export const cdiv = function(c1, c2) {
+  const mod = cmod2(c2);
+  const mul = cmul(c1, conjugate(c2));
+  return {
+    re: mul.re / mod,
+    im: mul.im / mod
+  };
 }
 
 export const cmod = function(c) {
   return Math.sqrt(re(c) * re(c) + im(c) * im(c));
+}
+
+export const cmod2 = function(c) {
+  return re(c) * re(c) + im(c) * im(c);
 }
 
 export const carg = function(c) {
