@@ -12,7 +12,7 @@ describe('form manipilation', () => {
   before(() => {
     c0 = {re: 1, im: 1};
     c1 = {r: 1, arg: 0};
-    c2 = {re: 1, im: 0};
+    c2 = {re: 1, im:0};
   });
 
   it('handles is polar', () => {
@@ -27,6 +27,6 @@ describe('form manipilation', () => {
 
   it('handles equals', () => {
     expect(cequals(c1, c2)).to.equals(true);
-  })
+  });
 
 });

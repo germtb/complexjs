@@ -14,5 +14,6 @@
     "quotes": [2, "single"],
     "no-trailing-spaces": [2, { "skipBlankLines": true }],
     "no-unused-vars": 2,
+    "semi": [2, "always"]
   }
 }
