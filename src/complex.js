@@ -32,26 +32,76 @@ export const im_polar = function(c) {
 }
 
 export const csum = function(c1, c2) {
-  return {re: re(c1) + re(c2), im: im(c1) + im(c2)};
+  return isEuler(c1) ? csum_euler(c1, toEuler(c2)) : csum_polar(c1, toPolar(c2));
+}
+
+export const csum_euler = function(c1, c2) {
+  return {
+    re: re(c1) + re(c2),
+    im: im(c1) + im(c2)
+  };
+}
+
+export const csum_polar = function(c1, c2) {
+  return toPolar({
+    re: re(c1) + re(c2),
+    im: im(c1) + im(c2)
+  });
 }
 
 export const csub = function(c1, c2) {
-  return {re: re(c1) - re(c2), im: im(c1) - im(c2)};
+  return isEuler(c1) ? csub_euler(c1, toEuler(c2)) : csub_polar(c1, toPolar(c2));
+}
+
+export const csub_euler = function(c1, c2) {
+  return {
+    re: re(c1) - re(c2),
+    im: im(c1) - im(c2)
+  };
+}
+
+export const csub_polar = function(c1, c2) {
+  return toPolar({
+    re: re(c1) - re(c2),
+    im: im(c1) - im(c2)
+  });
 }
 
 export const cmul = function(c1, c2) {
+  return isEuler(c1) ? cmul_euler(c1, toEuler(c2)) : cmul_polar(c1, toPolar(c2));
+}
+
+export const cmul_euler = function(c1, c2) {
   return {
     re: re(c1) * re(c2) - im(c1) * im(c2),
     im: re(c1) * im(c2) + re(c2) * im(c1)
   };
 }
 
+export const cmul_polar = function(c1, c2) {
+  return {
+    r: c1.r * c2.r,
+    arg: normalize(c1.arg + c2.arg)
+  };
+}
+
 export const cdiv = function(c1, c2) {
+  return isEuler(c1) ? cdiv_euler(c1, toEuler(c2)) : cdiv_polar(c1, toPolar(c2));
+}
+
+export const cdiv_euler = function(c1, c2) {
   const mod = cmod2(c2);
   const mul = cmul(c1, conjugate(c2));
   return {
     re: mul.re / mod,
     im: mul.im / mod
+  };
+}
+
+export const cdiv_polar = function(c1, c2) {
+  return {
+    r: c1.r / c2.r,
+    arg: normalize(c1.arg - c2.arg)
   };
 }
 
@@ -120,8 +170,19 @@ export const carg_polar = function(c) {
   return c.arg;
 }
 
+export const toEuler = function(c) {
+  return isEuler(c) ? c : toEuler_polar(c);
+}
+
+export const toEuler_polar = function(c) {
+  return {
+    re: re_polar(c),
+    im: im_polar(c)
+  }
+}
+
 export const toPolar = function(c) {
-  return isEuler(c) ? toPolar_euler(c) : toPolar_polar(c);
+  return isEuler(c) ? toPolar_euler(c) : c;
 }
 
 export const toPolar_euler = function(c) {
@@ -129,10 +190,6 @@ export const toPolar_euler = function(c) {
     r: cmod(c),
     arg: carg(c)
   };
-}
-
-export const toPolar_polar = function(c) {
-  return c;
 }
 
 export const conjugate = function(c) {

@@ -4,7 +4,7 @@ import {
   isEuler
 } from '../src/complex';
 
-describe('complexjs', () => {
+describe('form detection', () => {
 
   var complexEuler;
   var complexPolar;

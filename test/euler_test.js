@@ -13,7 +13,7 @@ import {
   conjugate,
 } from '../src/complex';
 
-describe('complexjs', () => {
+describe('euler form', () => {
 
   var c0, c1, c2, c3, c4, c5, c6, c7, c8;
 
