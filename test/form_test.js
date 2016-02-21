@@ -1,27 +1,32 @@
 import {expect} from 'chai';
 import {
   isPolar,
-  isEuler
+  isEuler,
+  cequals
 } from '../src/complex';
 
-describe('form detection', () => {
+describe('form manipilation', () => {
 
-  var complexEuler;
-  var complexPolar;
+  var c0, c1, c2;
 
   before(() => {
-    complexEuler = {re: 1, im: 1};
-    complexPolar = {r: 1, arg: 0};
+    c0 = {re: 1, im: 1};
+    c1 = {r: 1, arg: 0};
+    c2 = {re: 1, im: 0};
   });
 
   it('handles is polar', () => {
-    expect(isPolar(complexEuler)).to.equal(false);
-    expect(isPolar(complexPolar)).to.equal(true);
+    expect(isPolar(c0)).to.equal(false);
+    expect(isPolar(c1)).to.equal(true);
   });
 
   it('handles is euler', () => {
-    expect(isEuler(complexEuler)).to.equal(true);
-    expect(isEuler(complexPolar)).to.equal(false);
+    expect(isEuler(c0)).to.equal(true);
+    expect(isEuler(c1)).to.equal(false);
   });
+
+  it('handles equals', () => {
+    expect(cequals(c1, c2)).to.equals(true);
+  })
 
 });

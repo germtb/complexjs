@@ -16,7 +16,7 @@ export const re_euler = function(c) {
 }
 
 export const re_polar = function(c) {
-  return c.r * Math.sin(c.arg);
+  return c.r * Math.cos(c.arg);
 }
 
 export const im = function(c) {
@@ -28,7 +28,7 @@ export const im_euler = function(c) {
 }
 
 export const im_polar = function(c) {
-  return c.r * Math.cos(c.arg);
+  return c.r * Math.sin(c.arg);
 }
 
 export const csum = function(c1, c2) {
@@ -137,9 +137,9 @@ export const carg_euler = function(c) {
   const x = re(c);
   const y = im(c);
 
-  if ( y == 0) {
+  if ( y === 0) {
     return x > 0 ? 0 : Math.PI;
-  } else if (x == 0) {
+  } else if (x === 0) {
     return y > 0 ? Math.PI / 2 : - Math.PI / 2;
   }
 
@@ -208,4 +208,16 @@ export const conjugate_polar = function(c) {
     r: c.r,
     arg: -c.arg
   }
+}
+
+export const cequals = function(c1, c2) {
+  return isEuler(c1) ? cequals_euler(c1, toEuler(c2)) : cequals_polar(c1, toPolar(c2));
+}
+
+export const cequals_euler = function(c1, c2) {
+  return c1.re === c2.re && c1.im === c2.im;
+}
+
+export const cequals_polar = function(c1, c2) {
+  return c1.r === c2.r && c1.arg === c2.arg;
 }

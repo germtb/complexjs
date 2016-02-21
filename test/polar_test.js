@@ -10,6 +10,7 @@ import {
   cdiv,
   carg,
   toPolar,
+  toEuler,
   conjugate,
 } from '../src/complex';
 
@@ -40,13 +41,13 @@ describe('polar form', () => {
   });
 
   it('handles sum', () => {
-    expect(csum(c1, c2).r).to.be.closeTo(Math.sqrt(2), epsilon);
-    expect(csum(c1, c2).arg).to.be.closeTo(Math.PI / 2, epsilon);
+    expect(csum(c5, c6).r).to.be.closeTo(Math.sqrt(2), epsilon);
+    expect(csum(c5, c6).arg).to.be.closeTo(Math.PI / 4, epsilon);
   });
 
   it('handles substract', () => {
-    expect(csub(c1, c2).r).to.be.closeTo(Math.sqrt(2), epsilon);
-    expect(csub(c1, c2).arg).to.be.closeTo(Math.PI, epsilon);
+    expect(csub(c5, c6).r).to.be.closeTo(Math.sqrt(2), epsilon);
+    expect(csub(c5, c6).arg).to.be.closeTo(- Math.PI / 4, epsilon);
   });
 
   it('handles product', () => {
@@ -99,7 +100,12 @@ describe('polar form', () => {
 
   it('handles conversion to polar', () => {
     expect(toPolar(c1)).to.deep.equal(c1);
-  })
+  });
+
+  it('handles conversion to euler', () => {
+    expect(toEuler(c5).re).to.be.closeTo(1, epsilon);
+    expect(toEuler(c5).im).to.be.closeTo(0, epsilon);
+  });
 
   it('handles get conjugate', () => {
     expect(conjugate(c1)).to.deep.equal({r: 1, arg:  - Math.PI / 4});
