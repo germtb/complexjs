@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {
   translate,
   scale,
-  rotate
+  rotate,
+  distance
 } from '../src/geometry';
 
 describe('euler form', () => {
@@ -39,6 +40,10 @@ describe('euler form', () => {
   it('handles rotation around pivot', () => {
     expect(rotate(c1, Math.PI / 2, c3).re).to.be.closeTo(0, epsilon);
     expect(rotate(c1, Math.PI / 2, c3).im).to.be.closeTo(2, epsilon);
+  });
+
+  it('handles get distance', () => {
+    expect(distance(c1, c3)).to.be.closeTo(1, epsilon);
   });
 
 });

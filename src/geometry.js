@@ -1,7 +1,8 @@
 import {
   csum,
   cmul,
-  csub
+  csub,
+  cmod
 } from './complex';
 
 export const translate = function(c, translation) {
@@ -17,4 +18,8 @@ export const rotate = function(c, delta, pivot = {re: 0, im: 0}) {
   c = cmul(c, {r: 1, arg: delta });
   c = csum(c, pivot);
   return c;
+};
+
+export const distance = function(c1, c2) {
+  return cmod(csub(c1, c2));
 };
