@@ -61,11 +61,8 @@ describe('acceptance tests', () => {
 
   it('handles chained operations', () => {
     const scaledSquare = square.map(c => scale(c, 2));
-    console.log(scaledSquare);
     const translatedSquare = scaledSquare.map(c => translate(c, vector(-1, -1)));
-    console.log(translatedSquare);
     const rotatedSquare = translatedSquare.map(c => rotate(c, Math.PI / 2));
-    console.log(rotatedSquare);
 
     expect(rotatedSquare[0].re).to.be.closeTo(1, epsilon);
     expect(rotatedSquare[0].im).to.be.closeTo(-1, epsilon);
