@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {
+  vector,
   translate,
   scale,
   rotate,
@@ -13,23 +14,24 @@ describe('euler form', () => {
   var c1, c2, c3;
 
   before(() => {
-    c1 = {re: 1, im: 1};
-    c2 = {re: -1, im: 1};
-    c3 = {re: 0, im: 1};
+    c1 = vector(1, 1);
+    c2 = vector(-1, 1);
+    c3 = vector(0, 1);
   });
 
-  it('handles translation', () => {
-    expect(translate(c1, c2)).to.deep.equal({
+  it('handles create vector', () => {
+    expect(vector(0, 2)).to.deep.equal({
       re: 0,
       im: 2
     });
   });
 
+  it('handles translation', () => {
+    expect(translate(c1, c2)).to.deep.equal(vector(0, 2));
+  });
+
   it('handles scaling', () => {
-    expect(scale(c1, 2)).to.deep.equal({
-      re: 2,
-      im: 2
-    });
+    expect(scale(c1, 2)).to.deep.equal(vector(2, 2));
   });
 
   it('handles rotation around center', () => {
