@@ -4,26 +4,38 @@ This is a library for complex numbers calculations in javascript using plain obj
 
 It has been designed to be used for geometry applications, for which a little API has been included.
 
-## API
+## Complex numbers API
+
+Any object with the properties `re` or `im` (or `r` and `arg`) qualificates as a complex number for this API, so there are no creation methods for them.
 
 | Function | Explanation |
 | --- | --- |
-| `csum(c0, c1)` | Returns `c0` plus `c1` |
-| `csub(c0, c1)` | Returns the c0 minus `c1` |
-| `cmul(c0, c1)` | Returns `c0` times `c1` |
-| `cdiv(c0, c1)` | Returns `c0` over `c1` |
-| `conjugate(c)` | Returns the conjugate of `c` |
-| `cmod(c)` | Returns the modulus of `c` |
-| `cmod2(c)` | Returns the square modulus of `c` |
-| `isEuler(c)` | Returns `true` if `c` is can behave as a cartesian complex number |
-| `isPolar(c)` | Returns `true` if `c` is can behave as a polar complex number |
-| `re(c)` | Returns the real part of `c` |
-| `im(c)` | Returns the imaginary part of `c` |
-| `r(c)` | Returns the modulus of `c` |
-| `arg(c)` | Returns the argument of `c` |
-| `cequals(c1, c2)` | Returns `true` if `c1` and `c2` are equal |
+| `csum(c0 : complex, c1: complex)` | Returns `c0` plus `c1` |
+| `csub(c0 : complex, c1: complex)` | Returns the c0 minus `c1` |
+| `cmul(c0 : complex, c1: complex)` | Returns `c0` times `c1` |
+| `cdiv(c0 : complex, c1: complex)` | Returns `c0` over `c1` |
+| `conjugate(c : complex)` | Returns the conjugate of `c` |
+| `cmod(c : complex)` | Returns the modulus of `c` |
+| `cmod2(c : complex)` | Returns the square modulus of `c` |
+| `isEuler(c : complex)` | Returns `true` if `c` is can behave as a cartesian complex number |
+| `isPolar(c : complex)` | Returns `true` if `c` is can behave as a polar complex number |
+| `re(c : complex)` | Returns the real part of `c` |
+| `im(c : complex)` | Returns the imaginary part of `c` |
+| `r(c : complex)` | Returns the modulus of `c` |
+| `arg(c : complex)` | Returns the argument of `c` |
+| `cequals(c0 : complex, c1: complex)` | Returns `true` if `c0` and `c1` are equal |
 
-## Complex number calculations
+## Geometry API
+
+| Function | Explanation |
+| --- | --- |
+| `vector(x : number, y : number)` | Returns a plain object such as `{re: x, im: y}`|
+| `distance(c0 : complex, c1: complex)` | Returns the euclidian distance between `c0` and `c1` |
+| `translate(c : complex, translation : complex)` | Translates `c` by summing `translation` |
+| `rotate(c : complex, delta : number, pivot = {re: 0, im: 0})` | Rotates `c` around `pivot` for `delta` radians |
+| `scale(c : complex, factor : number, pivot = {re: 0, im: 0})` | Scales `c` from `pivot` multiplying by `factor` |
+
+## Complex number calculations examples
 
 Creating a complex number is as simples as this:
 
@@ -77,7 +89,7 @@ csum(c_object, c_number) // => {rgb: [255, 255, 255], re: 6, im: 0}
 
 In case both objects have properties, they will be merged. The first parameter will override the second one if the have a property with the same name.
 
-## Geometry applications
+## Geometry applications examples
 
 Complex numbers serve as an elegant representation of 2d geometry. To make its use even simpler, some methods have been created to wrap the algebra to match its geometric meaning.
 
