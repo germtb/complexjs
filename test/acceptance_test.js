@@ -55,7 +55,4 @@ describe('complexjs', () => {
     expect(rotatedSquare[3].im).to.be.closeTo(2, epsilon);
   });
 
-  it('asdasdas dsa sa', () => {
-  });
-
 });
