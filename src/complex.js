@@ -185,6 +185,8 @@ export const toEuler = function(c) {
 export const toEuler_polar = function(c) {
   return {
     ...c,
+    r: undefined,
+    arg: undefined,
     re: re_polar(c),
     im: im_polar(c)
   };
@@ -197,6 +199,8 @@ export const toPolar = function(c) {
 export const toPolar_euler = function(c) {
   return {
     ...c,
+    re: undefined,
+    im: undefined,
     r: cmod(c),
     arg: carg(c)
   };

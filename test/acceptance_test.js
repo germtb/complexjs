@@ -1,58 +1,108 @@
 import {expect} from 'chai';
 import {
+  vector,
+  translate,
+  rotate,
+  scale,
+  distance
+} from '../src/geometry';
+import {
   csum,
   cmul,
-  csub
 } from '../src/complex';
 
-describe('complexjs', () => {
+describe('acceptance tests', () => {
 
   const epsilon = 0.0001;
+  const square = [
+    {re: 0, im: 0},
+    {re: 1, im: 0},
+    {re: 1, im: 1},
+    {re: 0, im: 1}
+  ];
+  const segment = [
+    {re: 0, im: 0},
+    {re: 0, im: 1}
+  ];
+  const c0 = {re: 1, im: 0};
+  const c1 = {r: 1, arg: Math.PI / 2};
 
   it('handles sum between euler and polar', () => {
-    const c0 = {re: 1, im: 0};
-    const c1 = {r: 1, arg: 0};
-    expect(csum(c0, c1).re).to.equal(2);
-    expect(csum(c0, c1).im).to.equal(0);
-    expect(csum(c1, c0).re).to.equal(2);
-    expect(csum(c1, c0).im).to.equal(0);
+    const eulerPolar = csum(c0, c1);
+    expect(eulerPolar.re).to.equal(1);
+    expect(eulerPolar.im).to.equal(1);
+    expect(eulerPolar.r).to.equal(undefined);
+    expect(eulerPolar.arg).to.equal(undefined);
+  });
+
+  it('handles sum between polar and euler', () => {
+    const polarEuler = csum(c1, c0);
+    expect(polarEuler.r).to.equal(1);
+    expect(polarEuler.arg).to.be.closeTo(0, epsilon);
+    expect(polarEuler.re).to.equal(undefined);
+    expect(polarEuler.im).to.equal(undefined);
   });
 
   it('handles product between euler and polar', () => {
-    const c0 = {re: 1, im: 0};
-    const c1 = {r: 1, arg: Math.PI / 4};
-    expect(cmul(c0, c1).re).to.be.closeTo(Math.sqrt(2) / 2, epsilon);
-    expect(cmul(c0, c1).im).to.be.closeTo(Math.sqrt(2) / 2, epsilon);
-    expect(cmul(c1, c0).r).to.be.closeTo(1, epsilon);
-    expect(cmul(c1, c0).arg).to.be.closeTo(Math.PI / 4, epsilon);
+    const eulerPolar = cmul(c0, c1);
+    expect(eulerPolar.re).to.be.closeTo(0, epsilon);
+    expect(eulerPolar.im).to.be.closeTo(1, epsilon);
+    expect(eulerPolar.r).to.equal(undefined);
+    expect(eulerPolar.arg).to.equal(undefined);
+  });
+
+  it('handles product between polar and euler', () => {
+    const polarEuler = cmul(c1, c0);
+    expect(polarEuler.r).to.equal(1, epsilon);
+    expect(polarEuler.arg).to.be.closeTo(Math.PI / 2, epsilon);
+    expect(polarEuler.re).to.equal(undefined);
+    expect(polarEuler.im).to.equal(undefined);
   });
 
   it('handles chained operations', () => {
-    const square = [
-      {re: 0, im: 0},
-      {re: 1, im: 0},
-      {re: 1, im: 1},
-      {re: 0, im: 1}
-    ];
-    const scaledSquare = square.map(c => cmul(c, {re: 2}));
-    const rotatedSquare = scaledSquare.map(c => {
-      c = csub(c, {re:2, im:2});
-      c = cmul(c, {r: 1, arg: Math.PI });
-      c = csum(c, {re:2, im:2});
-      return c;
-    });
+    const scaledSquare = square.map(c => scale(c, 2));
+    console.log(scaledSquare);
+    const translatedSquare = scaledSquare.map(c => translate(c, vector(-1, -1)));
+    console.log(translatedSquare);
+    const rotatedSquare = translatedSquare.map(c => rotate(c, Math.PI / 2));
+    console.log(rotatedSquare);
 
-    expect(rotatedSquare[0].re).to.be.closeTo(4, epsilon);
-    expect(rotatedSquare[0].im).to.be.closeTo(4, epsilon);
+    expect(rotatedSquare[0].re).to.be.closeTo(1, epsilon);
+    expect(rotatedSquare[0].im).to.be.closeTo(-1, epsilon);
 
-    expect(rotatedSquare[1].re).to.be.closeTo(2, epsilon);
-    expect(rotatedSquare[1].im).to.be.closeTo(4, epsilon);
+    expect(rotatedSquare[1].re).to.be.closeTo(1, epsilon);
+    expect(rotatedSquare[1].im).to.be.closeTo(1, epsilon);
 
-    expect(rotatedSquare[2].re).to.be.closeTo(2, epsilon);
-    expect(rotatedSquare[2].im).to.be.closeTo(2, epsilon);
+    expect(rotatedSquare[2].re).to.be.closeTo(-1, epsilon);
+    expect(rotatedSquare[2].im).to.be.closeTo(1, epsilon);
 
-    expect(rotatedSquare[3].re).to.be.closeTo(4, epsilon);
-    expect(rotatedSquare[3].im).to.be.closeTo(2, epsilon);
+    expect(rotatedSquare[3].re).to.be.closeTo(-1, epsilon);
+    expect(rotatedSquare[3].im).to.be.closeTo(-1, epsilon);
+  });
+
+  it('keeps distance when on translation', () => {
+    const d0 = distance(segment[0], segment[1]);
+    const translatedSegment = segment.map(c => translate(c, vector(5, 3)));
+    const d1 = distance(translatedSegment[0], translatedSegment[1]);
+    expect(d0).to.equal(d1);
+  });
+
+  it('keeps distance when on rotation', () => {
+    const d0 = distance(segment[0], segment[1]);
+    const rotatedSegment = segment.map(c => rotate(c, Math.PI / 4, vector(5, 3)));
+    const d1 = distance(rotatedSegment[0], rotatedSegment[1]);
+    expect(d0).to.be.closeTo(d1, epsilon);
+  });
+
+  it('keeps proportions when on scale', () => {
+    const d01 = distance(square[0], square[1]);
+    const d12 = distance(square[1], square[2]);
+    const p012 = d01 / d12;
+    const scaledSquare = square.map(c => scale(c, 3, vector(5, 3)));
+    const _d01 = distance(scaledSquare[0], scaledSquare[1]);
+    const _d12 = distance(scaledSquare[1], scaledSquare[2]);
+    const _p012 = _d01 / _d12;
+    expect(p012).to.equal(_p012);
   });
 
 });

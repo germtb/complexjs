@@ -30,8 +30,12 @@ describe('euler form', () => {
     expect(translate(c1, c2)).to.deep.equal(vector(0, 2));
   });
 
-  it('handles scaling', () => {
+  it('handles scaling around center', () => {
     expect(scale(c1, 2)).to.deep.equal(vector(2, 2));
+  });
+
+  it('handles scaling around pivot', () => {
+    expect(scale(c1, 2, c1)).to.deep.equal(vector(1, 1));
   });
 
   it('handles rotation around center', () => {
