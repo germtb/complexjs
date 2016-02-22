@@ -24,19 +24,19 @@ describe('composition', () => {
   });
 
   it('is preserved for euler sum', () => {
-    expect(csum(c0, c1).object).to.equal(o1);
+    expect(csum(c0, c1).object).to.equal(o0);
   });
 
   it('is preserved for euler substract', () => {
-    expect(csub(c0, c1).object).to.equal(o1);
+    expect(csub(c0, c1).object).to.equal(o0);
   });
 
   it('is preserved for euler product', () => {
-    expect(cmul(c0, c1).object).to.equal(o1);
+    expect(cmul(c0, c1).object).to.equal(o0);
   });
 
   it('is preserved for euler division', () => {
-    expect(cdiv(c0, c1).object).to.equal(o1);
+    expect(cdiv(c0, c1).object).to.equal(o0);
   });
 
   it('is preserved for conversion to euler polar', () => {
@@ -48,19 +48,19 @@ describe('composition', () => {
   });
 
   it('is preserved for polar sum', () => {
-    expect(csum(p0, p1).object).to.equal(o1);
+    expect(csum(p0, p1).object).to.equal(o0);
   });
 
   it('is preserved for polar substract', () => {
-    expect(csub(p0, p1).object).to.equal(o1);
+    expect(csub(p0, p1).object).to.equal(o0);
   });
 
   it('is preserved for polar product', () => {
-    expect(cmul(p0, p1).object).to.equal(o1);
+    expect(cmul(p0, p1).object).to.equal(o0);
   });
 
   it('is preserved for polar division', () => {
-    expect(cdiv(p0, p1).object).to.equal(o1);
+    expect(cdiv(p0, p1).object).to.equal(o0);
   });
 
   it('is preserved for conversion to euler', () => {

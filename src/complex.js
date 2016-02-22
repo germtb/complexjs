@@ -37,7 +37,7 @@ export const csum = function(c1, c2) {
 
 export const csum_euler = function(c1, c2) {
   return {
-    ...c1, ...c2,
+    ...c2, ...c1,
     re: re(c1) + re(c2),
     im: im(c1) + im(c2)
   };
@@ -45,7 +45,7 @@ export const csum_euler = function(c1, c2) {
 
 export const csum_polar = function(c1, c2) {
   return {
-    ...c1, ...c2,
+    ...c2, ...c1,
     ...toPolar({re: re(c1) + re(c2), im: im(c1) + im(c2)})
   };
 };
@@ -56,7 +56,7 @@ export const csub = function(c1, c2) {
 
 export const csub_euler = function(c1, c2) {
   return {
-    ...c1, ...c2,
+    ...c2, ...c1,
     re: re(c1) - re(c2),
     im: im(c1) - im(c2)
   };
@@ -64,7 +64,7 @@ export const csub_euler = function(c1, c2) {
 
 export const csub_polar = function(c1, c2) {
   return {
-    ...c1, ...c2,
+    ...c2, ...c1,
     ...toPolar({
       re: re(c1) - re(c2),
       im: im(c1) - im(c2)})
@@ -77,7 +77,7 @@ export const cmul = function(c1, c2) {
 
 export const cmul_euler = function(c1, c2) {
   return {
-    ...c1, ...c2,
+    ...c2, ...c1,
     re: re(c1) * re(c2) - im(c1) * im(c2),
     im: re(c1) * im(c2) + re(c2) * im(c1)
   };
@@ -85,7 +85,7 @@ export const cmul_euler = function(c1, c2) {
 
 export const cmul_polar = function(c1, c2) {
   return {
-    ...c1, ...c2,
+    ...c2, ...c1,
     r: c1.r * c2.r,
     arg: normalize(c1.arg + c2.arg)
   };
@@ -99,7 +99,7 @@ export const cdiv_euler = function(c1, c2) {
   const mul = cmul(c1, conjugate(c2));
   const mod2 = cmod2(c2);
   return {
-    ...c1, ...c2,
+    ...c2, ...c1,
     re: mul.re / mod2,
     im: mul.im / mod2
   };
@@ -107,7 +107,7 @@ export const cdiv_euler = function(c1, c2) {
 
 export const cdiv_polar = function(c1, c2) {
   return {
-    ...c1, ...c2,
+    ...c2, ...c1,
     r: c1.r / c2.r,
     arg: normalize(c1.arg - c2.arg)
   };
