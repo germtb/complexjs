@@ -23,3 +23,10 @@ export const rotate = function(c, delta, pivot = {re: 0, im: 0}) {
 export const distance = function(c1, c2) {
   return cmod(csub(c1, c2));
 };
+
+export const vector = function(x, y) {
+  return {
+    re: x,
+    im: y
+  };
+};
