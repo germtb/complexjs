@@ -4,6 +4,25 @@ This is a library for complex numbers calculations in javascript using plain obj
 
 It has been designed to be used for geometry applications, for which a little API has been included.
 
+## API
+
+| Function | Explanation |
+| --- | --- |
+| csum(c0, c1) | Returns c0 plus c1 |
+| csub(c0, c1) | Returns the c0 minus c1 |
+| cmul(c0, c1) | Returns c0 times c1 |
+| cdiv(c0, c1) | Returns c0 over c1 |
+| conjugate(c) | Returns the conjugate of c |
+| cmod(c) | Returns the modulus of c |
+| cmod2(c) | Returns the square modulus of c |
+| isEuler(c) | Returns true if c is can behave as a cartesian complex number |
+| isPolar(c) | Returns true if c is can behave as a polar complex number |
+| re(c) | Returns the real part of c |
+| im(c) | Returns the imaginary part of c |
+| r(c) | Returns the modulus of c |
+| arg(c) | Returns the argument of c |
+| cequals(c1, c2) | Returns true if c1 and c2 are equal |
+
 ## Complex number calculations
 
 Creating a complex number is as simples as this:
