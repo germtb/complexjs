@@ -83,15 +83,15 @@ describe('acceptance tests', () => {
   it('keeps distance when on translation', () => {
     const d0 = distance(segment[0], segment[1]);
     const translatedSegment = segment.map(c => translate(c, vector(5, 3)));
-    const d1 = distance(translatedSegment[0], translatedSegment[1]);
-    expect(d0).to.equal(d1);
+    const _d0 = distance(translatedSegment[0], translatedSegment[1]);
+    expect(d0).to.equal(_d0);
   });
 
   it('keeps distance when on rotation', () => {
     const d0 = distance(segment[0], segment[1]);
     const rotatedSegment = segment.map(c => rotate(c, Math.PI / 4, vector(5, 3)));
-    const d1 = distance(rotatedSegment[0], rotatedSegment[1]);
-    expect(d0).to.be.closeTo(d1, epsilon);
+    const _d0 = distance(rotatedSegment[0], rotatedSegment[1]);
+    expect(d0).to.be.closeTo(_d0, epsilon);
   });
 
   it('keeps proportions when on scale', () => {
