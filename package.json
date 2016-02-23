@@ -1,7 +1,7 @@
 {
   "name": "complexjs",
   "version": "1.0.0",
-  "description": "This is a library for complex numbers calculations in javascript using plain objects",
+  "description": "This is a library for complex numbers calculations in javascript using plain objects immutably",
   "main": "",
   "babel": {
     "presets": [
