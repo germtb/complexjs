@@ -10,7 +10,7 @@ import {
   cdiv,
   carg,
   toPolar,
-  toEuler,
+  toCartesian,
   conjugate,
 } from '../src/complex';
 
@@ -102,9 +102,9 @@ describe('polar form', () => {
     expect(toPolar(c1)).to.deep.equal(c1);
   });
 
-  it('handles conversion to euler', () => {
-    expect(toEuler(c5).re).to.be.closeTo(1, epsilon);
-    expect(toEuler(c5).im).to.be.closeTo(0, epsilon);
+  it('handles conversion to cartesian', () => {
+    expect(toCartesian(c5).re).to.be.closeTo(1, epsilon);
+    expect(toCartesian(c5).im).to.be.closeTo(0, epsilon);
   });
 
   it('handles get conjugate', () => {

@@ -17,7 +17,7 @@ Any object with the properties `re` or `im` (or `r` and `arg`) qualifies as a co
 | `conjugate(c : complex)` | Returns the conjugate of `c` |
 | `cmod(c : complex)` | Returns the modulus of `c` |
 | `cmod2(c : complex)` | Returns the square modulus of `c` |
-| `isEuler(c : complex)` | Returns `true` if `c` is can behave as a cartesian complex number |
+| `isCartesian(c : complex)` | Returns `true` if `c` is can behave as a cartesian complex number |
 | `isPolar(c : complex)` | Returns `true` if `c` is can behave as a polar complex number |
 | `re(c : complex)` | Returns the real part of `c` |
 | `im(c : complex)` | Returns the imaginary part of `c` |

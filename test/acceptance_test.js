@@ -27,36 +27,36 @@ describe('acceptance tests', () => {
   const c0 = {re: 1, im: 0};
   const c1 = {r: 1, arg: Math.PI / 2};
 
-  it('handles sum between euler and polar', () => {
-    const eulerPolar = csum(c0, c1);
-    expect(eulerPolar.re).to.equal(1);
-    expect(eulerPolar.im).to.equal(1);
-    expect(eulerPolar.r).to.equal(undefined);
-    expect(eulerPolar.arg).to.equal(undefined);
+  it('handles sum between cartesian and polar', () => {
+    const cartesianPolar = csum(c0, c1);
+    expect(cartesianPolar.re).to.equal(1);
+    expect(cartesianPolar.im).to.equal(1);
+    expect(cartesianPolar.r).to.equal(undefined);
+    expect(cartesianPolar.arg).to.equal(undefined);
   });
 
-  it('handles sum between polar and euler', () => {
-    const polarEuler = csum(c1, c0);
-    expect(polarEuler.r).to.equal(1);
-    expect(polarEuler.arg).to.be.closeTo(0, epsilon);
-    expect(polarEuler.re).to.equal(undefined);
-    expect(polarEuler.im).to.equal(undefined);
+  it('handles sum between polar and cartesian', () => {
+    const polarCartesian = csum(c1, c0);
+    expect(polarCartesian.r).to.equal(1);
+    expect(polarCartesian.arg).to.be.closeTo(0, epsilon);
+    expect(polarCartesian.re).to.equal(undefined);
+    expect(polarCartesian.im).to.equal(undefined);
   });
 
-  it('handles product between euler and polar', () => {
-    const eulerPolar = cmul(c0, c1);
-    expect(eulerPolar.re).to.be.closeTo(0, epsilon);
-    expect(eulerPolar.im).to.be.closeTo(1, epsilon);
-    expect(eulerPolar.r).to.equal(undefined);
-    expect(eulerPolar.arg).to.equal(undefined);
+  it('handles product between cartesian and polar', () => {
+    const cartesianPolar = cmul(c0, c1);
+    expect(cartesianPolar.re).to.be.closeTo(0, epsilon);
+    expect(cartesianPolar.im).to.be.closeTo(1, epsilon);
+    expect(cartesianPolar.r).to.equal(undefined);
+    expect(cartesianPolar.arg).to.equal(undefined);
   });
 
-  it('handles product between polar and euler', () => {
-    const polarEuler = cmul(c1, c0);
-    expect(polarEuler.r).to.equal(1, epsilon);
-    expect(polarEuler.arg).to.be.closeTo(Math.PI / 2, epsilon);
-    expect(polarEuler.re).to.equal(undefined);
-    expect(polarEuler.im).to.equal(undefined);
+  it('handles product between polar and cartesian', () => {
+    const polarCartesian = cmul(c1, c0);
+    expect(polarCartesian.r).to.equal(1, epsilon);
+    expect(polarCartesian.arg).to.be.closeTo(Math.PI / 2, epsilon);
+    expect(polarCartesian.re).to.equal(undefined);
+    expect(polarCartesian.im).to.equal(undefined);
   });
 
   it('handles chained operations', () => {

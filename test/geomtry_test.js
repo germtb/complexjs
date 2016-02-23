@@ -7,7 +7,7 @@ import {
   distance
 } from '../src/geometry';
 
-describe('euler form', () => {
+describe('cartesian form', () => {
 
   const epsilon = 0.0001;
 

@@ -23,27 +23,27 @@ describe('composition', () => {
     p1 = {r: 1, arg: Math.PI / 2, object: o1};
   });
 
-  it('is preserved for euler sum', () => {
+  it('is preserved for cartesian sum', () => {
     expect(csum(c0, c1).object).to.equal(o0);
   });
 
-  it('is preserved for euler substract', () => {
+  it('is preserved for cartesian substract', () => {
     expect(csub(c0, c1).object).to.equal(o0);
   });
 
-  it('is preserved for euler product', () => {
+  it('is preserved for cartesian product', () => {
     expect(cmul(c0, c1).object).to.equal(o0);
   });
 
-  it('is preserved for euler division', () => {
+  it('is preserved for cartesian division', () => {
     expect(cdiv(c0, c1).object).to.equal(o0);
   });
 
-  it('is preserved for conversion to euler polar', () => {
+  it('is preserved for conversion to cartesian polar', () => {
     expect(toPolar(c0).object).to.equal(o0);
   });
 
-  it('is preserved for get euler conjugate', () => {
+  it('is preserved for get cartesian conjugate', () => {
     expect(conjugate(c0).object).to.equal(o0);
   });
 
@@ -63,7 +63,7 @@ describe('composition', () => {
     expect(cdiv(p0, p1).object).to.equal(o0);
   });
 
-  it('is preserved for conversion to euler', () => {
+  it('is preserved for conversion to cartesian', () => {
     expect(toPolar(p0).object).to.equal(o0);
   });
 

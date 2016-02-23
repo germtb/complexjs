@@ -1,5 +1,5 @@
 
-export function isEuler(c) {
+export function isCartesian(c) {
   return 're' in c || 'im' in c;
 }
 
@@ -8,10 +8,10 @@ export function isPolar(c) {
 }
 
 export function re(c) {
-  return isEuler(c) ? re_euler(c) : re_polar(c);
+  return isCartesian(c) ? re_cartesian(c) : re_polar(c);
 }
 
-export function re_euler(c) {
+export function re_cartesian(c) {
   return c.re ? c.re : 0;
 }
 
@@ -20,10 +20,10 @@ export function re_polar(c) {
 }
 
 export function im(c) {
-  return isEuler(c) ? im_euler(c) : im_polar(c);
+  return isCartesian(c) ? im_cartesian(c) : im_polar(c);
 }
 
-export function im_euler(c) {
+export function im_cartesian(c) {
   return c.im ? c.im : 0;
 }
 
@@ -32,10 +32,10 @@ export function im_polar(c) {
 }
 
 export function csum(c1, c2) {
-  return isEuler(c1) ? csum_euler(c1, toEuler(c2)) : csum_polar(c1, toPolar(c2));
+  return isCartesian(c1) ? csum_cartesian(c1, toCartesian(c2)) : csum_polar(c1, toPolar(c2));
 }
 
-export function csum_euler(c1, c2) {
+export function csum_cartesian(c1, c2) {
   return {
     ...c2, ...c1,
     re: re(c1) + re(c2),
@@ -51,10 +51,10 @@ export function csum_polar(c1, c2) {
 }
 
 export function csub(c1, c2) {
-  return isEuler(c1) ? csub_euler(c1, toEuler(c2)) : csub_polar(c1, toPolar(c2));
+  return isCartesian(c1) ? csub_cartesian(c1, toCartesian(c2)) : csub_polar(c1, toPolar(c2));
 }
 
-export function csub_euler(c1, c2) {
+export function csub_cartesian(c1, c2) {
   return {
     ...c2, ...c1,
     re: re(c1) - re(c2),
@@ -72,10 +72,10 @@ export function csub_polar(c1, c2) {
 }
 
 export function cmul(c1, c2) {
-  return isEuler(c1) ? cmul_euler(c1, toEuler(c2)) : cmul_polar(c1, toPolar(c2));
+  return isCartesian(c1) ? cmul_cartesian(c1, toCartesian(c2)) : cmul_polar(c1, toPolar(c2));
 }
 
-export function cmul_euler(c1, c2) {
+export function cmul_cartesian(c1, c2) {
   return {
     ...c2, ...c1,
     re: re(c1) * re(c2) - im(c1) * im(c2),
@@ -92,10 +92,10 @@ export function cmul_polar(c1, c2) {
 }
 
 export function cdiv(c1, c2) {
-  return isEuler(c1) ? cdiv_euler(c1, toEuler(c2)) : cdiv_polar(c1, toPolar(c2));
+  return isCartesian(c1) ? cdiv_cartesian(c1, toCartesian(c2)) : cdiv_polar(c1, toPolar(c2));
 }
 
-export function cdiv_euler(c1, c2) {
+export function cdiv_cartesian(c1, c2) {
   const mul = cmul(c1, conjugate(c2));
   const mod2 = cmod2(c2);
   return {
@@ -114,10 +114,10 @@ export function cdiv_polar(c1, c2) {
 }
 
 export function cmod(c) {
-  return isEuler(c) ? cmod_euler(c) : cmod_polar(c);
+  return isCartesian(c) ? cmod_cartesian(c) : cmod_polar(c);
 }
 
-export function cmod_euler(c) {
+export function cmod_cartesian(c) {
   return Math.sqrt(re(c) * re(c) + im(c) * im(c));
 }
 
@@ -126,10 +126,10 @@ export function cmod_polar(c) {
 }
 
 export function cmod2(c) {
-  return isEuler(c) ? cmod2_euler(c) : cmod2_polar(c);
+  return isCartesian(c) ? cmod2_cartesian(c) : cmod2_polar(c);
 }
 
-export function cmod2_euler(c) {
+export function cmod2_cartesian(c) {
   return re(c) * re(c) + im(c) * im(c);
 }
 
@@ -138,10 +138,10 @@ export function cmod2_polar(c) {
 }
 
 export function carg(c) {
-  return isEuler(c) ? carg_euler(c) : carg_polar(c);
+  return isCartesian(c) ? carg_cartesian(c) : carg_polar(c);
 }
 
-export function carg_euler(c) {
+export function carg_cartesian(c) {
   const x = re(c);
   const y = im(c);
 
@@ -178,11 +178,11 @@ export function carg_polar(c) {
   return c.arg;
 }
 
-export function toEuler(c) {
-  return isEuler(c) ? c : toEuler_polar(c);
+export function toCartesian(c) {
+  return isCartesian(c) ? c : toCartesian_polar(c);
 }
 
-export function toEuler_polar(c) {
+export function toCartesian_polar(c) {
   return {
     ...c,
     r: undefined,
@@ -193,10 +193,10 @@ export function toEuler_polar(c) {
 }
 
 export function toPolar(c) {
-  return isEuler(c) ? toPolar_euler(c) : c;
+  return isCartesian(c) ? toPolar_cartesian(c) : c;
 }
 
-export function toPolar_euler(c) {
+export function toPolar_cartesian(c) {
   return {
     ...c,
     re: undefined,
@@ -207,10 +207,10 @@ export function toPolar_euler(c) {
 }
 
 export function conjugate(c) {
-  return isEuler(c) ? conjugate_euler(c) : conjugate_polar(c);
+  return isCartesian(c) ? conjugate_cartesian(c) : conjugate_polar(c);
 }
 
-export function conjugate_euler(c) {
+export function conjugate_cartesian(c) {
   return {
     ...c,
     re: re(c),
@@ -227,10 +227,10 @@ export function conjugate_polar(c) {
 }
 
 export function cequals(c1, c2) {
-  return isEuler(c1) ? cequals_euler(c1, toEuler(c2)) : cequals_polar(c1, toPolar(c2));
+  return isCartesian(c1) ? cequals_cartesian(c1, toCartesian(c2)) : cequals_polar(c1, toPolar(c2));
 }
 
-export function cequals_euler(c1, c2) {
+export function cequals_cartesian(c1, c2) {
   return c1.re === c2.re &&  c1.im === c2.im;
 }
 

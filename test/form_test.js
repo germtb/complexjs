@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {
   isPolar,
-  isEuler,
+  isCartesian,
   cequals
 } from '../src/complex';
 
@@ -20,9 +20,9 @@ describe('form manipilation', () => {
     expect(isPolar(c1)).to.equal(true);
   });
 
-  it('handles is euler', () => {
-    expect(isEuler(c0)).to.equal(true);
-    expect(isEuler(c1)).to.equal(false);
+  it('handles is cartesian', () => {
+    expect(isCartesian(c0)).to.equal(true);
+    expect(isCartesian(c1)).to.equal(false);
   });
 
   it('handles equals', () => {
