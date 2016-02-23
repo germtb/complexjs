@@ -6,7 +6,7 @@ It has been designed to be used for geometry applications, for which a little AP
 
 ## Complex numbers API
 
-Any object with the properties `re` or `im` (or `r` and `arg`) qualificates as a complex number for this API, so there are no creation methods for them.
+Any object with the properties `re` or `im` (or `r` and `arg`) qualifies as a complex number for this API, so there are no creation methods for them.
 
 | Function | Explanation |
 | --- | --- |
@@ -37,7 +37,7 @@ Any object with the properties `re` or `im` (or `r` and `arg`) qualificates as a
 
 ## Complex number calculations examples
 
-Creating a complex number is as simples as this:
+Creating a complex number is as simple as:
 
 ```javascript
 // Cartesian form
