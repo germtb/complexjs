@@ -1,10 +1,10 @@
 
 export function isCartesian(c) {
-  return 're' in c || 'im' in c;
+  return ('re' in c || 'im' in c);
 }
 
 export function isPolar(c) {
-  return 'r' in c && 'arg' in c;
+  return ('r' in c && 'arg' in c);
 }
 
 export function re(c) {
@@ -113,6 +113,24 @@ export function cdiv_polar(c1, c2) {
   }
 }
 
+export function cpow(c, n) {
+  return isCartesian(c) ? cpow_cartesian(c, n) : cpow_polar(c, n);
+}
+
+export function cpow_cartesian(c, n) {
+  const power = cpow_polar(toPolar(c), n);
+  const extractedvar = toCartesian(power);
+  return extractedvar;
+}
+
+export function cpow_polar(c, n) {
+  return {
+    ...c,
+    r: Math.pow(c.r, n),
+    arg: normalize(c.arg * n)
+  };
+}
+
 export function cmod(c) {
   return isCartesian(c) ? cmod_cartesian(c) : cmod_polar(c);
 }
@@ -183,13 +201,15 @@ export function toCartesian(c) {
 }
 
 export function toCartesian_polar(c) {
-  return {
+  const _c = {
     ...c,
-    r: undefined,
-    arg: undefined,
     re: re_polar(c),
     im: im_polar(c)
-  }
+  };
+
+  delete _c.r;
+  delete _c.arg;
+  return _c;
 }
 
 export function toPolar(c) {
@@ -197,13 +217,15 @@ export function toPolar(c) {
 }
 
 export function toPolar_cartesian(c) {
-  return {
+  const _c = {
     ...c,
-    re: undefined,
-    im: undefined,
     r: cmod(c),
     arg: carg(c)
-  }
+  };
+
+  delete _c.re;
+  delete _c.im;
+  return _c;
 }
 
 export function conjugate(c) {

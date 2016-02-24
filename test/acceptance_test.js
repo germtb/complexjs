@@ -37,8 +37,8 @@ describe('acceptance tests', () => {
 
   it('handles sum between polar and cartesian', () => {
     const polarCartesian = csum(c1, c0);
-    expect(polarCartesian.r).to.equal(1);
-    expect(polarCartesian.arg).to.be.closeTo(0, epsilon);
+    expect(polarCartesian.r).to.equal(Math.sqrt(2));
+    expect(polarCartesian.arg).to.be.closeTo(Math.PI / 4, epsilon);
     expect(polarCartesian.re).to.equal(undefined);
     expect(polarCartesian.im).to.equal(undefined);
   });

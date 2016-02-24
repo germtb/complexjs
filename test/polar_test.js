@@ -8,6 +8,7 @@ import {
   cmod,
   cmod2,
   cdiv,
+  cpow,
   carg,
   toPolar,
   toCartesian,
@@ -56,6 +57,11 @@ describe('polar form', () => {
 
   it('handles division', () => {
     expect(cdiv(c1, c0)).to.deep.equal({r: 1/3, arg: - Math.PI / 4});
+  });
+
+  it('handles power', () => {
+    expect(cpow(c1, 2).r).to.be.closeTo(1, epsilon);
+    expect(cpow(c1, 2).arg).to.be.closeTo(Math.PI / 2, epsilon);
   });
 
   it('handles get modulus', () => {

@@ -8,6 +8,7 @@ import {
   cmod,
   cmod2,
   cdiv,
+  cpow,
   carg,
   toPolar,
   conjugate,
@@ -15,6 +16,7 @@ import {
 
 describe('cartesian form', () => {
 
+  const epsilon = 0.0001;
   var c0, c1, c2, c3, c4, c5, c6, c7, c8;
 
   before(() => {
@@ -54,6 +56,11 @@ describe('cartesian form', () => {
 
   it('handles division', () => {
     expect(cdiv(c1, c0)).to.deep.equal({re: 7/25, im: -1/25});
+  });
+
+  it('handles power', () => {
+    expect(cpow(c6, 2).re).to.be.closeTo(-1, epsilon);
+    expect(cpow(c6, 2).im).to.be.closeTo(0, epsilon);
   });
 
   it('handles get modulus', () => {
