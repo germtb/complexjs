@@ -4,9 +4,7 @@ import {
   translate,
   rotate,
   scale,
-  distance
-} from '../src/geometry';
-import {
+  distance,
   csum,
   cmul,
 } from '../src/complex';

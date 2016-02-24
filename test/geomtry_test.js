@@ -5,7 +5,7 @@ import {
   scale,
   rotate,
   distance
-} from '../src/geometry';
+} from '../src/complex';
 
 describe('cartesian form', () => {
 

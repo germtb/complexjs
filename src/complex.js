@@ -1,10 +1,10 @@
 
 export function isCartesian(c) {
-  return ('re' in c || 'im' in c);
+  return 're' in c || 'im' in c;
 }
 
 export function isPolar(c) {
-  return ('r' in c && 'arg' in c);
+  return 'r' in c && 'arg' in c;
 }
 
 export function re(c) {
@@ -40,14 +40,14 @@ export function csum_cartesian(c1, c2) {
     ...c2, ...c1,
     re: re(c1) + re(c2),
     im: im(c1) + im(c2)
-  }
+  };
 }
 
 export function csum_polar(c1, c2) {
   return {
     ...c2, ...c1,
     ...toPolar({re: re(c1) + re(c2), im: im(c1) + im(c2)})
-  }
+  };
 }
 
 export function csub(c1, c2) {
@@ -59,7 +59,7 @@ export function csub_cartesian(c1, c2) {
     ...c2, ...c1,
     re: re(c1) - re(c2),
     im: im(c1) - im(c2)
-  }
+  };
 }
 
 export function csub_polar(c1, c2) {
@@ -68,7 +68,7 @@ export function csub_polar(c1, c2) {
     ...toPolar({
       re: re(c1) - re(c2),
       im: im(c1) - im(c2)})
-  }
+  };
 }
 
 export function cmul(c1, c2) {
@@ -80,7 +80,7 @@ export function cmul_cartesian(c1, c2) {
     ...c2, ...c1,
     re: re(c1) * re(c2) - im(c1) * im(c2),
     im: re(c1) * im(c2) + re(c2) * im(c1)
-  }
+  };
 }
 
 export function cmul_polar(c1, c2) {
@@ -88,7 +88,7 @@ export function cmul_polar(c1, c2) {
     ...c2, ...c1,
     r: c1.r * c2.r,
     arg: normalize(c1.arg + c2.arg)
-  }
+  };
 }
 
 export function cdiv(c1, c2) {
@@ -102,7 +102,7 @@ export function cdiv_cartesian(c1, c2) {
     ...c2, ...c1,
     re: mul.re / mod2,
     im: mul.im / mod2
-  }
+  };
 }
 
 export function cdiv_polar(c1, c2) {
@@ -110,7 +110,7 @@ export function cdiv_polar(c1, c2) {
     ...c2, ...c1,
     r: c1.r / c2.r,
     arg: normalize(c1.arg - c2.arg)
-  }
+  };
 }
 
 export function cpow(c, n) {
@@ -237,7 +237,7 @@ export function conjugate_cartesian(c) {
     ...c,
     re: re(c),
     im: -im(c)
-  }
+  };
 }
 
 export function conjugate_polar(c) {
@@ -245,7 +245,7 @@ export function conjugate_polar(c) {
     ...c,
     r: c.r,
     arg: -c.arg
-  }
+  };
 }
 
 export function cequals(c1, c2) {
@@ -258,4 +258,31 @@ export function cequals_cartesian(c1, c2) {
 
 export function cequals_polar(c1, c2) {
   return c1.r === c2.r && c1.arg === c2.arg;
+}
+
+export function translate(c, translation) {
+  return csum(c, translation);
+}
+
+export function scale(c, factor, pivot = undefined) {
+  return pivot ?
+    csum(cmul(csub(c, pivot), {re: factor}), pivot) :
+    cmul(c, {re: factor});
+}
+
+export function rotate(c, delta, pivot = undefined) {
+  return pivot ?
+    csum(cmul(csub(c, pivot), {r: 1, arg: delta }), pivot) :
+    cmul(c, {r: 1, arg: delta });
+}
+
+export function distance(c1, c2) {
+  return cmod(csub(c1, c2));
+}
+
+export function vector(x, y) {
+  return {
+    re: x,
+    im: y
+  };
 }

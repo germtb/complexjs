@@ -26,6 +26,9 @@ exports.cmul_polar = cmul_polar;
 exports.cdiv = cdiv;
 exports.cdiv_cartesian = cdiv_cartesian;
 exports.cdiv_polar = cdiv_polar;
+exports.cpow = cpow;
+exports.cpow_cartesian = cpow_cartesian;
+exports.cpow_polar = cpow_polar;
 exports.cmod = cmod;
 exports.cmod_cartesian = cmod_cartesian;
 exports.cmod_polar = cmod_polar;
@@ -45,6 +48,11 @@ exports.conjugate_polar = conjugate_polar;
 exports.cequals = cequals;
 exports.cequals_cartesian = cequals_cartesian;
 exports.cequals_polar = cequals_polar;
+exports.translate = translate;
+exports.scale = scale;
+exports.rotate = rotate;
+exports.distance = distance;
+exports.vector = vector;
 function isCartesian(c) {
   return 're' in c || 'im' in c;
 }
@@ -147,6 +155,23 @@ function cdiv_polar(c1, c2) {
   });
 }
 
+function cpow(c, n) {
+  return isCartesian(c) ? cpow_cartesian(c, n) : cpow_polar(c, n);
+}
+
+function cpow_cartesian(c, n) {
+  var power = cpow_polar(toPolar(c), n);
+  var extractedvar = toCartesian(power);
+  return extractedvar;
+}
+
+function cpow_polar(c, n) {
+  return _extends({}, c, {
+    r: Math.pow(c.r, n),
+    arg: normalize(c.arg * n)
+  });
+}
+
 function cmod(c) {
   return isCartesian(c) ? cmod_cartesian(c) : cmod_polar(c);
 }
@@ -217,12 +242,14 @@ function toCartesian(c) {
 }
 
 function toCartesian_polar(c) {
-  return _extends({}, c, {
-    r: undefined,
-    arg: undefined,
+  var _c = _extends({}, c, {
     re: re_polar(c),
     im: im_polar(c)
   });
+
+  delete _c.r;
+  delete _c.arg;
+  return _c;
 }
 
 function toPolar(c) {
@@ -230,12 +257,14 @@ function toPolar(c) {
 }
 
 function toPolar_cartesian(c) {
-  return _extends({}, c, {
-    re: undefined,
-    im: undefined,
+  var _c = _extends({}, c, {
     r: cmod(c),
     arg: carg(c)
   });
+
+  delete _c.re;
+  delete _c.im;
+  return _c;
 }
 
 function conjugate(c) {
@@ -266,5 +295,32 @@ function cequals_cartesian(c1, c2) {
 
 function cequals_polar(c1, c2) {
   return c1.r === c2.r && c1.arg === c2.arg;
+}
+
+function translate(c, translation) {
+  return csum(c, translation);
+}
+
+function scale(c, factor) {
+  var pivot = arguments.length <= 2 || arguments[2] === undefined ? undefined : arguments[2];
+
+  return pivot ? csum(cmul(csub(c, pivot), { re: factor }), pivot) : cmul(c, { re: factor });
+}
+
+function rotate(c, delta) {
+  var pivot = arguments.length <= 2 || arguments[2] === undefined ? undefined : arguments[2];
+
+  return pivot ? csum(cmul(csub(c, pivot), { r: 1, arg: delta }), pivot) : cmul(c, { r: 1, arg: delta });
+}
+
+function distance(c1, c2) {
+  return cmod(csub(c1, c2));
+}
+
+function vector(x, y) {
+  return {
+    re: x,
+    im: y
+  };
 }
 
