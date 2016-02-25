@@ -1,6 +1,6 @@
 {
   "name": "complexjs",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "This is a library for complex numbers calculations in javascript using plain objects immutably",
   "main": "dist/complex-es5.js",
   "babel": {
@@ -42,7 +42,7 @@
     "url": "https://github.com/germtb/complexjs"
   },
   "pre-commit": [
-    "lint",
-    "test"
+    "test",
+    "build"
   ]
 }
