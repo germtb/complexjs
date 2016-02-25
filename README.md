@@ -11,7 +11,7 @@ Any object with the properties `re` or `im` (or `r` and `arg`) qualifies as a co
 | Function | Explanation |
 | --- | --- |
 | `csum(c0 : complex, c1: complex)` | Returns `c0` plus `c1` |
-| `csub(c0 : complex, c1: complex)` | Returns the c0 minus `c1` |
+| `csub(c0 : complex, c1: complex)` | Returns the `c0` minus `c1` |
 | `cmul(c0 : complex, c1: complex)` | Returns `c0` times `c1` |
 | `cdiv(c0 : complex, c1: complex)` | Returns `c0` over `c1` |
 | `conjugate(c : complex)` | Returns the conjugate of `c` |
@@ -55,6 +55,7 @@ const c_polar = {
 Both forms can be mixed, and the form of the first number will be preserved:
 
 ```javascript
+import {csum} from 'complexjs';
 csum(c_cartesian, c_polar); // => {re: 1, im: 1}
 csum(c_polar, c_cartesian); // => {r: 1.414, arg: 0.785}
 ```
@@ -62,6 +63,13 @@ csum(c_polar, c_cartesian); // => {r: 1.414, arg: 0.785}
 All the basic functions are provided. All of them are pure functions:
 
 ```javascript
+import {
+  cmul,
+  cdiv,
+  cmod,
+  conjugate
+} from 'complexjs';
+
 cmul(c_cartesian, c_polar); // => {re: 0, im: 1}
 cdiv(c_cartesian, c_polar); // => {re: 0, im: -1}
 cmod(c_cartesian); // => 1
