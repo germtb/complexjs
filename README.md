@@ -14,6 +14,7 @@ Any object with the properties `re` or `im` (or `r` and `arg`) qualifies as a co
 | `csub(c0 : complex, c1: complex)` | Returns the `c0` minus `c1` |
 | `cmul(c0 : complex, c1: complex)` | Returns `c0` times `c1` |
 | `cdiv(c0 : complex, c1: complex)` | Returns `c0` over `c1` |
+| `cpow(c0 : complex, n: number)` | Returns `c0` to the power of `n` |
 | `conjugate(c : complex)` | Returns the conjugate of `c` |
 | `cmod(c : complex)` | Returns the modulus of `c` |
 | `cmod2(c : complex)` | Returns the square modulus of `c` |
@@ -61,12 +62,9 @@ csum(c_polar, c_cartesian); // => {r: 1.414, arg: 0.785}
 ```
 
 All the basic functions are provided. All of them are pure functions:
-
-```javascript
-import {
+to the power of ```javascriptnumbn {
   cmul,
-  cdiv,
-  cmod,
+  cdivpow cmod,
   conjugate
 } from 'complexjs';
 
