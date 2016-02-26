@@ -286,3 +286,17 @@ export function vector(x, y) {
     im: y
   };
 }
+
+export function lerp(c1, c2, t) {
+  return isCartesian(c1) ? lerp_cartesian(c1, toCartesian(c2), t) : undefined;
+}
+
+export function lerp_cartesian(c1, c2, t) {
+  if (t >= 1) {
+    return c2;
+  } else if (t <= 0) {
+    return c1;
+  } else {
+    return csum(cmul(c1, {re: (1 - t)}), cmul(c2, {re: t}));
+  }
+}

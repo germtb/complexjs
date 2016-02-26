@@ -12,6 +12,7 @@ import {
   carg,
   toPolar,
   conjugate,
+  lerp
 } from '../src/complex';
 
 describe('cartesian form', () => {
@@ -110,6 +111,11 @@ describe('cartesian form', () => {
 
   it('handles get conjugate', () => {
     expect(conjugate(c1)).to.deep.equal({re: 1, im: -1});
+  });
+
+  it('handles lerp', () => {
+    expect(lerp(c5, c6, 0.5).re).to.equal(0.5);
+    expect(lerp(c5, c6, 0.5).im).to.equal(0.5);
   });
 
 });
