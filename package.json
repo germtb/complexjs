@@ -42,7 +42,6 @@
     "url": "https://github.com/germtb/complexjs"
   },
   "pre-commit": [
-    "test",
-    "build"
+    "test"
   ]
 }
