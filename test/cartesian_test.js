@@ -5,6 +5,7 @@ import {
   csum,
   csub,
   cmul,
+  rmul,
   cmod,
   cmod2,
   cdiv,
@@ -53,6 +54,10 @@ describe('cartesian form', () => {
 
   it('handles product', () => {
     expect(cmul(c1, c0)).to.deep.equal({re: -1, im: 7});
+  });
+
+  it('handles product with a real number', () => {
+    expect(rmul(c1, 2)).to.deep.equal({re: 2, im: 2});
   });
 
   it('handles division', () => {

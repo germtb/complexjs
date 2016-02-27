@@ -91,6 +91,26 @@ export function cmul_polar(c1, c2) {
   };
 }
 
+export function rmul(c, x) {
+  return isCartesian(c) ? cmul_cartesian(c, x) : cmul_polar(c, x);
+}
+
+export function rmul_cartesian(c, x) {
+  return {
+    ...c,
+    re: x * c.re,
+    im: x * c.im
+  };
+}
+
+export function rmul_polar(c, x) {
+  return {
+    ...c,
+    r: x * c.r,
+    arg: c.arg
+  };
+}
+
 export function cdiv(c1, c2) {
   return isCartesian(c1) ? cdiv_cartesian(c1, toCartesian(c2)) : cdiv_polar(c1, toPolar(c2));
 }
@@ -288,7 +308,7 @@ export function vector(x, y) {
 }
 
 export function lerp(c1, c2, t) {
-  return isCartesian(c1) ? lerp_cartesian(c1, toCartesian(c2), t) : undefined;
+  return isCartesian(c1) ? lerp_cartesian(c1, toCartesian(c2), t) : lerp_polar(c1, toPolar(c2));
 }
 
 export function lerp_cartesian(c1, c2, t) {
@@ -297,6 +317,10 @@ export function lerp_cartesian(c1, c2, t) {
   } else if (t <= 0) {
     return c1;
   } else {
-    return csum(cmul(c1, {re: (1 - t)}), cmul(c2, {re: t}));
+    return csum(rmul(c1, 1 - t), rmul(c2, t));
   }
+}
+
+export function lerp_polar(c1, c2, t) {
+  return toPolar(lerp_cartesian(toEuler(c1), toEuler(c2), t));
 }
