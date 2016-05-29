@@ -33,8 +33,7 @@
     "jsdom": "^7.2.2",
     "mocha": "^2.3.4",
     "pre-commit": "^1.1.2",
-    "webpack": "^1.12.12",
-    "webpack-dev-server": "^1.14.1"
+    "webpack": "^1.12.12"
   },
   "dependencies": {},
   "repository": {
