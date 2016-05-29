@@ -13,7 +13,7 @@
     "pretest": "eslint .",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.@(js|jsx)'",
     "test:watch": "npm run test -- --watch",
-    "build": "babel src/complex.js > dist/complex-es5.js"
+    "build": "babel src/complex.js -o dist/complex-es5.js"
   },
   "keywords": [
     "complex numbers",
