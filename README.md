@@ -62,7 +62,9 @@ csum(c_polar, c_cartesian); // => {r: 1.414, arg: 0.785}
 ```
 
 All the basic functions are provided. All of them are pure functions:
-to the power of ```javascriptnumbn {
+
+```javascript
+import {
   cmul,
   cdivpow cmod,
   conjugate
